@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+      POSTGRES_DB: testdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  web:
+    build: . # カレントディレクトリにあるDockerfileを使ってイメージをビルド
+    depends_on: # 依存関係の設定
+      - db
+    ports: # ポートの設定
+      - "8000:8000"
+    volumes:
+      - .:/code
+volumes:
+  db-data:

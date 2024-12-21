@@ -1,0 +1,4 @@
+services:
+  debian:
+    image: debian
+    tty: true # 起動させたままにするオプション

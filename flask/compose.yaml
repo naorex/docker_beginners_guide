@@ -1,0 +1,9 @@
+services:
+  web:
+    build: . # カレントディレクトリにあるDockerfileを使ってイメージをビルド
+    environment: # 環境変数を設定
+      FLASK_ENV: development
+    ports: # ポートの設定
+      - "5000:5000"
+    volumes:
+      - ./src:/usr/src/app # ホストのsrcディレクトリをコンテナの/usr/src/appにバインドマウント

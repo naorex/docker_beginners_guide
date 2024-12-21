@@ -1,0 +1,20 @@
+services:
+  db:
+    image: mariadb
+    environment: # 環境変数を設定
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: testdb
+      MARIADB_USER: testuser
+      MARIADB_PASSWORD: testpass
+    volumes:
+      - db-data:/var/lib/mysql
+    php:
+      build: .
+      depends_on:
+        - db
+      ports:
+        - "8080:80"
+      volumes:
+        - ./src:/var/www/html
+volumes: # データベースが持つデータを永続化する設定
+  db-data:

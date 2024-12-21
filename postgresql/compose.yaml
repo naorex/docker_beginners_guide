@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres
+    environment: # 環境変数を設定
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes: # データベースが持つデータを永続化する設定
+  db-data:

@@ -1,0 +1,6 @@
+services:
+  ruby:
+    image: ruby
+    tty: true # 起動させたままにするオプション
+    volumes:
+      - ./src:/src

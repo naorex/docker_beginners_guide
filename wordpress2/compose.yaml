@@ -1,0 +1,26 @@
+services:
+  db: # MariaDBのコンテナを定義
+    image: mariadb
+    environment: # 環境変数を設定
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+    volumes:
+      - db-data:/var/lib/mysql
+  wordpress: # WordPressのコンテナを定義
+    image: wordpress
+    depends_on: # dbコンテナが起動してからwordpressコンテナを起動
+      - db
+    environment: # 環境変数を設定
+      WORDPRESS_DB_HOST: db # MariaDBのコンテナ名
+      WORDPRESS_DB_NAME: wordpress # MariaDBのデータベース名
+      WORDPRESS_DB_USER: wordpress # MariaDBのユーザー名
+      WORDPRESS_DB_PASSWORD: wordpress # MariaDBのパスワード
+    ports:
+      - 8080:80
+    volumes:
+      - ./html:/var/www/html # バインドマウントで設定
+volumes:
+  db-data: # MariaDBのデータを保存するための永続化ボリューム
+  # wp-data: バインドマウントのため不要
